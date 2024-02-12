@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://cydlqp815j1wm"]
+
+[ext_resource type="Script" path="res://core/player.gd" id="1_hm74a"]
+[ext_resource type="PackedScene" uid="uid://ch1fchvq8pb2v" path="res://core/player_swing.tscn" id="2_mq1h4"]
+[ext_resource type="Texture2D" uid="uid://c51iixruwiwli" path="res://core/sprites/Lich_01.png" id="3_7hr5c"]
+[ext_resource type="Texture2D" uid="uid://4yp1hqk5tk4b" path="res://core/sprites/Lich_02.png" id="4_n2x40"]
+[ext_resource type="Texture2D" uid="uid://c64xuevirtd7g" path="res://core/sprites/Lich_03.png" id="5_b8qkl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lhfc3"]
+radius = 15.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_exsyl"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_n2x40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b8qkl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7hr5c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="Lich" type="CharacterBody2D" groups=["Player"]]
+motion_mode = 1
+script = ExtResource("1_hm74a")
+basicAttackPrefab = ExtResource("2_mq1h4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lhfc3")
+
+[node name="DashTimeout" type="Timer" parent="."]
+wait_time = 0.15
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+position = Vector2(0, -70)
+sprite_frames = SubResource("SpriteFrames_exsyl")
+autoplay = "default"
+frame_progress = 0.939986
+
+[connection signal="timeout" from="DashTimeout" to="." method="_on_dash_timeout_timeout"]

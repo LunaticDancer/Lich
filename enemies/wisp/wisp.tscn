@@ -1,0 +1,99 @@
+[gd_scene load_steps=13 format=3 uid="uid://8pa7jm5j8mk6"]
+
+[ext_resource type="Script" path="res://enemies/wisp/wisp.gd" id="1_o121w"]
+[ext_resource type="Texture2D" uid="uid://cq2nbol3f4ixw" path="res://enemies/wisp/Wisp.png" id="1_rp2xm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4w1yj"]
+radius = 15.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3yl7"]
+atlas = ExtResource("1_rp2xm")
+region = Rect2(80, 140, 80, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mw13"]
+atlas = ExtResource("1_rp2xm")
+region = Rect2(160, 140, 80, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1qgo"]
+atlas = ExtResource("1_rp2xm")
+region = Rect2(0, 280, 80, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vy7i3"]
+atlas = ExtResource("1_rp2xm")
+region = Rect2(80, 280, 80, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5b7ls"]
+atlas = ExtResource("1_rp2xm")
+region = Rect2(0, 0, 80, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5vvg"]
+atlas = ExtResource("1_rp2xm")
+region = Rect2(80, 0, 80, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8iwho"]
+atlas = ExtResource("1_rp2xm")
+region = Rect2(160, 0, 80, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oxdum"]
+atlas = ExtResource("1_rp2xm")
+region = Rect2(0, 140, 80, 140)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8tu6v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3yl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3yl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mw13")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1qgo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vy7i3")
+}],
+"loop": false,
+"name": &"death",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5b7ls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5vvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8iwho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oxdum")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[node name="wisp" type="RigidBody2D" node_paths=PackedStringArray("renderer")]
+gravity_scale = 0.0
+max_contacts_reported = 32
+contact_monitor = true
+lock_rotation = true
+script = ExtResource("1_o121w")
+renderer = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4w1yj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 3
+position = Vector2(0, -57)
+sprite_frames = SubResource("SpriteFrames_8tu6v")
+autoplay = "default"
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

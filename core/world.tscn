@@ -1,0 +1,207 @@
+[gd_scene load_steps=14 format=3 uid="uid://bbixjs8kdo7j"]
+
+[ext_resource type="Script" path="res://core/game_controller.gd" id="1_4ubsc"]
+[ext_resource type="PackedScene" uid="uid://3stwd766vpxl" path="res://core/play_area.tscn" id="2_xaokt"]
+[ext_resource type="Script" path="res://core/Camera.gd" id="3_psfdv"]
+[ext_resource type="Shader" path="res://core/ManaFill.gdshader" id="4_6xaee"]
+[ext_resource type="Texture2D" uid="uid://b52eybbdtmgq2" path="res://ui/ManaFill.png" id="4_bbh6m"]
+[ext_resource type="Script" path="res://ui/GameplayUI.gd" id="4_kj8t1"]
+[ext_resource type="Texture2D" uid="uid://brhsrmhwqbts0" path="res://ui/ManaBall.png" id="5_a1wq6"]
+[ext_resource type="Texture2D" uid="uid://ckp7r2xr7namj" path="res://ui/ManaSurface.png" id="6_c24mh"]
+[ext_resource type="Texture2D" uid="uid://cqrsjy1wa5mk1" path="res://ui/AbilityBall.png" id="8_r6edc"]
+[ext_resource type="Texture2D" uid="uid://dghrmefrjqvnc" path="res://ui/DashBook.png" id="9_buipd"]
+[ext_resource type="Texture2D" uid="uid://ddml00rfkucsy" path="res://ui/Dash1.png" id="10_kav2h"]
+[ext_resource type="Texture2D" uid="uid://bopfaewgn8nmg" path="res://ui/Dash2.png" id="11_bkyve"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v1mjq"]
+shader = ExtResource("4_6xaee")
+shader_parameter/fill = 0.5
+
+[node name="World" type="Node2D" groups=["GameController"]]
+script = ExtResource("1_4ubsc")
+play_area_scene = ExtResource("2_xaokt")
+
+[node name="Camera" type="Camera2D" parent="." groups=["Camera"]]
+script = ExtResource("3_psfdv")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" type="AspectRatioContainer" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -48.0
+offset_right = 21.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MainMenu"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Lich"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="UI/MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+
+[node name="Quit" type="Button" parent="UI/MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[node name="GameplayUI" type="Control" parent="UI"]
+visible = false
+texture_filter = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_kj8t1")
+
+[node name="Mana" type="Control" parent="UI/GameplayUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -130.0
+offset_right = 130.0
+grow_vertical = 0
+
+[node name="Fill" type="TextureRect" parent="UI/GameplayUI/Mana"]
+texture_filter = 3
+material = SubResource("ShaderMaterial_v1mjq")
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = -127.0
+offset_right = 128.0
+grow_vertical = 0
+texture = ExtResource("4_bbh6m")
+
+[node name="Surface" type="TextureRect" parent="UI/GameplayUI/Mana"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -73.0
+offset_right = 63.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(64, 10)
+texture = ExtResource("6_c24mh")
+
+[node name="Frame" type="TextureRect" parent="UI/GameplayUI/Mana"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -201.0
+offset_right = 134.0
+grow_vertical = 0
+texture = ExtResource("5_a1wq6")
+
+[node name="SpellSlot" type="Control" parent="UI/GameplayUI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Frame" type="TextureRect" parent="UI/GameplayUI/SpellSlot"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -134.0
+offset_top = -201.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("8_r6edc")
+
+[node name="Dashes" type="Control" parent="UI/GameplayUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Book" type="TextureRect" parent="UI/GameplayUI/Dashes"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -106.0
+offset_top = -73.0
+offset_right = 106.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("9_buipd")
+
+[node name="Left" type="TextureRect" parent="UI/GameplayUI/Dashes"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -88.0
+offset_top = -51.0
+offset_right = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("10_kav2h")
+
+[node name="Right" type="TextureRect" parent="UI/GameplayUI/Dashes"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = -48.0
+offset_right = 90.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("11_bkyve")
+
+[connection signal="pressed" from="UI/MainMenu/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="UI/MainMenu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
