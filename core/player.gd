@@ -21,7 +21,6 @@ func _physics_process(delta):
 	var ydirection = Input.get_axis("up", "down")
 	var direction = Vector2(xdirection, ydirection).normalized()
 	velocity = direction * (DASH_SPEED if is_dashing else SPEED)
-
 	move_and_slide()
 
 func _unhandled_input(event):
