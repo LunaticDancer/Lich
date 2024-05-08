@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 400.0
-const DASH_SPEED = 1200.0
+const DASH_SPEED = 1600.0
 
 @export var basicAttackPrefab : PackedScene
 var game_controller
