@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbbvosouesy2b"]
+
+[ext_resource type="Script" path="res://abilities/shield/shield_ability.gd" id="1_nbjhg"]
+[ext_resource type="Texture2D" uid="uid://c12heykrdb5a6" path="res://abilities/shield/shield.png" id="2_fnj30"]
+
+[node name="ShieldAbility" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nbjhg")
+icon = ExtResource("2_fnj30")

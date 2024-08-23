@@ -11,14 +11,12 @@ var play_area
 var dashes = 2.0
 var mana = 0.0
 var score = 0
-var ability
+var ability : Ability
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(63,63))
-	pass
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -54,6 +52,15 @@ func enemy_killed(score_value : int):
 	dashes = min(dashes + 1, 2)
 	$UI/GameplayUI.update_dashes(dashes)
 	$UI/GameplayUI.update_mana(mana/100.0)
+
+func swap_ability(new_ability : PackedScene):
+	for child in $UI/GameplayUI/SpellSlot/AbilityHolder.get_children():
+		child.queue_free()
+	var ability_instance = new_ability.instantiate()
+	$UI/GameplayUI/SpellSlot/AbilityHolder.add_child(ability_instance)
+	ability = ability_instance
+	$UI/GameplayUI/SpellSlot/AbilityIcon.texture = ability.icon
+
 
 func receive_mana_damage(amount : int):
 	mana = max(0, mana - amount)
