@@ -6,8 +6,8 @@ var spawn_range
 func _ready():
 	var screenResolution = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"),
 		ProjectSettings.get_setting("display/window/size/viewport_height"))
-	spawn_range = sqrt( (screenResolution.x * screenResolution.x) + (screenResolution.y * screenResolution.y) ) / 2
-	print_debug(spawn_range)
+	spawn_range = sqrt( (screenResolution.x * screenResolution.x) 
+		+ (screenResolution.y * screenResolution.y) ) / 2
 
 func _on_spawn_timer_timeout():
 	spawn_random()

@@ -1,0 +1,58 @@
+[gd_scene load_steps=10 format=3 uid="uid://cvunf4ey4akxx"]
+
+[ext_resource type="Shader" path="res://enemies/blood_vfx/blood_splatter.gdshader" id="1_jc3sn"]
+[ext_resource type="Texture2D" uid="uid://b107v6llkepb" path="res://enemies/blood_vfx/BloodSplatters.png" id="1_q2ly0"]
+[ext_resource type="Script" path="res://enemies/blood_vfx/blood_splatter.gd" id="1_whcow"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0fhfb"]
+resource_local_to_scene = true
+shader = ExtResource("1_jc3sn")
+shader_parameter/intensity = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15qhj"]
+atlas = ExtResource("1_q2ly0")
+region = Rect2(80, 80, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n50w1"]
+atlas = ExtResource("1_q2ly0")
+region = Rect2(160, 80, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2g3c"]
+atlas = ExtResource("1_q2ly0")
+region = Rect2(0, 160, 80, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpnly"]
+atlas = ExtResource("1_q2ly0")
+region = Rect2(80, 160, 80, 80)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gblah"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15qhj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n50w1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2g3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpnly")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[node name="blood_splatter" type="AnimatedSprite2D"]
+z_index = -4096
+texture_filter = 1
+material = SubResource("ShaderMaterial_0fhfb")
+sprite_frames = SubResource("SpriteFrames_gblah")
+autoplay = "default"
+script = ExtResource("1_whcow")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

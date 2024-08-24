@@ -16,6 +16,7 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body):
 	if body is Enemy:
 		body.receive_damage(1)
+		body.bleed(Vector2(cos(direction), sin(direction)))
 
 func _on_animated_sprite_2d_animation_finished():
 	queue_free()
