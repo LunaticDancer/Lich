@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/wisp/wisp.gd" id="1_o121w"]
 [ext_resource type="Texture2D" uid="uid://cq2nbol3f4ixw" path="res://enemies/wisp/Wisp.png" id="1_rp2xm"]
-[ext_resource type="PackedScene" uid="uid://r4p4fudxiesf" path="res://enemies/blood_vfx/blood_drop.tscn" id="2_6fqqy"]
+[ext_resource type="PackedScene" uid="uid://bbbvosouesy2b" path="res://abilities/shield/shield_ability.tscn" id="2_mc3a0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4w1yj"]
 radius = 15.0
@@ -86,8 +86,9 @@ max_contacts_reported = 32
 contact_monitor = true
 script = ExtResource("1_o121w")
 renderer = NodePath("AnimatedSprite2D")
-blood_drop = ExtResource("2_6fqqy")
 blood_per_hit = 5
+ability_pool = Array[PackedScene]([ExtResource("2_mc3a0")])
+ability_drop_chance = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_4w1yj")
