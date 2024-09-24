@@ -18,7 +18,7 @@ const mat4 THRESHOLD_MATRIX = mat4(
 
 // --- Functions --- //
 void fragment() {
-	vec2 uv = UV / TEXTURE_PIXEL_SIZE;
+	vec2 uv = SCREEN_UV / SCREEN_PIXEL_SIZE;
 	//float player_dist = (clamp(1.0 - distance(SCREEN_UV / SCREEN_PIXEL_SIZE, player_position / SCREEN_PIXEL_SIZE) * SCREEN_PIXEL_SIZE.x / radius, 0.0, 1.0)) * player_influence * step(0.01, intensity);
 	//COLOR.a *= step(0.0, THRESHOLD_MATRIX[int(uv.x) % 4][int(uv.y) % 4] - intensity - player_dist);
 	COLOR.a *= step(0.0, THRESHOLD_MATRIX[int(uv.x) % 4][int(uv.y) % 4] - intensity);
