@@ -48,6 +48,7 @@ func init_player_resources():
 
 func enemy_killed(score_value : int):
 	score += score_value
+	$UI/GameplayUI/Score/ScoreDisplay.text = "Score: " + str(score)
 	mana = min(mana + 10, 100)
 	dashes = min(dashes + 1, 2)
 	$UI/GameplayUI.update_dashes(dashes)

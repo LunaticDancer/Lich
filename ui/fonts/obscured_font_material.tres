@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ccgvol28ntq3w"]
+
+[ext_resource type="Shader" path="res://ui/fonts/font_overlap.gdshader" id="1_abjxx"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_abjxx")
+shader_parameter/color = Color(0.878431, 0.588235, 0.658824, 1)
+shader_parameter/obscured_color = Color(0.0392157, 0.0352941, 0.0705882, 1)
+shader_parameter/background_color = Color(1, 0.945098, 0.921569, 1)
