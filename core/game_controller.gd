@@ -1,11 +1,14 @@
 extends Node2D
 
+enum MENU_STATE {MAIN, GAMEPLAY, PAUSE, PICKUP}
+
 @export var play_area_scene : PackedScene
 
 var hand_cursor = load("res://core/sprites/Cursor2.png")
 var cross_cursor = load("res://core/sprites/Cursor1.png")
 
 var play_area
+var current_state = MENU_STATE.MAIN
 
 # player resources
 var dashes = 2.0
@@ -22,6 +25,22 @@ func _ready():
 func _process(delta):
 	handle_dash_regen(delta)
 
+func _unhandled_input(event):
+	if current_state == MENU_STATE.GAMEPLAY:
+		if event.is_action_pressed("pause"):
+			pause()
+			return
+	if current_state == MENU_STATE.PAUSE:
+		if event.is_action_pressed("pause"):
+			_on_resume_pressed()
+			return
+
+func pause():
+	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(63,63))
+	get_tree().paused = true
+	current_state = MENU_STATE.PAUSE
+	$UI/PauseMenu.show()
+
 func handle_dash_regen(delta):
 	dashes = min(dashes + delta, 2)
 	$UI/GameplayUI.update_dashes(dashes)
@@ -31,6 +50,7 @@ func spend_dash():
 	$UI/GameplayUI.update_dashes(dashes)
 
 func _on_play_pressed():
+	current_state = MENU_STATE.GAMEPLAY
 	$UI/MainMenu.hide()
 	$UI/GameplayUI.show()
 	play_area = play_area_scene.instantiate()
@@ -73,3 +93,24 @@ func game_over():
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+func _on_resume_pressed():
+	current_state = MENU_STATE.GAMEPLAY
+	Input.set_custom_mouse_cursor(cross_cursor, Input.CURSOR_ARROW, Vector2(63,63))
+	get_tree().paused = false
+	$UI/PauseMenu.hide()
+
+func _on_reset_pressed():
+	play_area.queue_free()
+	get_tree().paused = false
+	$UI/PauseMenu.hide()
+	_on_play_pressed()
+
+func _on_to_menu_pressed():
+	$Camera.inGameplay = false
+	play_area.queue_free()
+	current_state = MENU_STATE.MAIN
+	get_tree().paused = false
+	$UI/GameplayUI.hide()
+	$UI/PauseMenu.hide()
+	$UI/MainMenu.show()

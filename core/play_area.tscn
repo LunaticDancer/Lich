@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://8pa7jm5j8mk6" path="res://enemies/wisp/wisp.tscn" id="3_cki4b"]
 
 [node name="PlayArea" type="Node2D"]
+process_mode = 1
 y_sort_enabled = true
 script = ExtResource("1_fqvlf")
 enemies = Array[PackedScene]([ExtResource("3_cki4b")])
