@@ -59,7 +59,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 24.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -97,6 +97,7 @@ shape = SubResource("CircleShape2D_4w1yj")
 texture_filter = 3
 position = Vector2(0, -57)
 sprite_frames = SubResource("SpriteFrames_8tu6v")
+animation = &"death"
 autoplay = "default"
 
 [connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
