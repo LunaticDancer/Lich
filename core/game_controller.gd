@@ -15,6 +15,7 @@ var dashes = 2.0
 var mana = 0.0
 var score = 0
 var ability : Ability
+var considered_ability : PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -56,6 +57,7 @@ func _on_play_pressed():
 	current_state = MENU_STATE.GAMEPLAY
 	$UI/MainMenu.hide()
 	$UI/GameplayUI.show()
+	$UI/GameplayUI/SpellSlot/AbilityIcon.texture = null
 	play_area = play_area_scene.instantiate()
 	Input.set_custom_mouse_cursor(cross_cursor, Input.CURSOR_ARROW, Vector2(63,63))
 	init_player_resources()
@@ -76,6 +78,17 @@ func enemy_killed(score_value : int):
 	dashes = min(dashes + 1, 2)
 	$UI/GameplayUI.update_dashes(dashes)
 	$UI/GameplayUI.update_mana(mana/100.0)
+
+func on_ability_pickup(new_ability : PackedScene):
+	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(63,63))
+	current_state = MENU_STATE.PICKUP
+	get_tree().paused = true
+	considered_ability = new_ability
+	var ability_instance = new_ability.instantiate()
+	$UI/AbilityPickUpScreen.show()
+	$UI/AbilityPickUpScreen/VBoxContainer/AbilityName.text = ability_instance.ability_name
+	$UI/AbilityPickUpScreen/VBoxContainer/HBoxContainer2/AbilityIcon.texture = ability_instance.icon
+	$UI/AbilityPickUpScreen/VBoxContainer/HBoxContainer2/Description.text = ability_instance.ability_description
 
 func swap_ability(new_ability : PackedScene):
 	for child in $UI/GameplayUI/SpellSlot/AbilityHolder.get_children():
@@ -118,6 +131,20 @@ func _on_to_menu_pressed():
 	play_area.queue_free()
 	current_state = MENU_STATE.MAIN
 	get_tree().paused = false
+	$UI/AbilityPickUpScreen.hide()
 	$UI/GameplayUI.hide()
 	$UI/PauseMenu.hide()
 	$UI/MainMenu.show()
+
+func _on_take_ability_pressed():
+	Input.set_custom_mouse_cursor(cross_cursor, Input.CURSOR_ARROW, Vector2(63,63))
+	current_state = MENU_STATE.GAMEPLAY
+	swap_ability(considered_ability)
+	get_tree().paused = false
+	$UI/AbilityPickUpScreen.hide()
+
+func _on_discard_ability_pressed():
+	Input.set_custom_mouse_cursor(cross_cursor, Input.CURSOR_ARROW, Vector2(63,63))
+	current_state = MENU_STATE.GAMEPLAY
+	get_tree().paused = false
+	$UI/AbilityPickUpScreen.hide()

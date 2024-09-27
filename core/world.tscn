@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bbixjs8kdo7j"]
+[gd_scene load_steps=24 format=3 uid="uid://bbixjs8kdo7j"]
 
 [ext_resource type="Script" path="res://core/game_controller.gd" id="1_4ubsc"]
 [ext_resource type="PackedScene" uid="uid://3stwd766vpxl" path="res://core/play_area.tscn" id="2_xaokt"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://brhsrmhwqbts0" path="res://ui/ManaBall.png" id="5_a1wq6"]
 [ext_resource type="FontFile" uid="uid://bmwvsl65v7etv" path="res://ui/fonts/Dante.ttf" id="5_ncdfs"]
 [ext_resource type="Texture2D" uid="uid://ckp7r2xr7namj" path="res://ui/ManaSurface.png" id="6_c24mh"]
+[ext_resource type="Texture2D" uid="uid://c12heykrdb5a6" path="res://abilities/shield/shield.png" id="6_lfhsi"]
 [ext_resource type="Texture2D" uid="uid://cqrsjy1wa5mk1" path="res://ui/AbilityBall.png" id="8_r6edc"]
 [ext_resource type="Texture2D" uid="uid://dghrmefrjqvnc" path="res://ui/DashBook.png" id="9_buipd"]
 [ext_resource type="Texture2D" uid="uid://ddml00rfkucsy" path="res://ui/Dash1.png" id="10_kav2h"]
@@ -121,6 +122,91 @@ theme_override_fonts/font = ExtResource("5_ncdfs")
 theme_override_font_sizes/font_size = 24
 text = "Made  by  Lunatic  Dancer"
 vertical_alignment = 2
+
+[node name="AbilityPickUpScreen" type="Control" parent="UI"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/AbilityPickUpScreen"]
+layout_mode = 2
+offset_left = 420.0
+offset_right = 1500.0
+offset_bottom = 1080.0
+alignment = 1
+
+[node name="AbilityName" type="Label" parent="UI/AbilityPickUpScreen/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.439216, 0.341176, 0.611765, 1)
+theme_override_colors/font_shadow_color = Color(0.878431, 0.588235, 0.658824, 1)
+theme_override_colors/font_outline_color = Color(0.0392157, 0.0352941, 0.0705882, 1)
+theme_override_fonts/font = ExtResource("4_weo8u")
+theme_override_font_sizes/font_size = 96
+text = "Ability Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/AbilityPickUpScreen/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="AbilityIcon" type="TextureRect" parent="UI/AbilityPickUpScreen/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("6_lfhsi")
+stretch_mode = 2
+
+[node name="Description" type="Label" parent="UI/AbilityPickUpScreen/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(640, 64)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.588235, 0.658824, 1)
+theme_override_fonts/font = ExtResource("5_ncdfs")
+theme_override_font_sizes/font_size = 48
+text = "Longer ability description"
+autowrap_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/AbilityPickUpScreen/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TakeAbility" type="Button" parent="UI/AbilityPickUpScreen/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.588235, 0.658824, 1)
+theme_override_colors/font_pressed_color = Color(0.0392157, 0.0352941, 0.0705882, 1)
+theme_override_colors/font_hover_color = Color(0.439216, 0.341176, 0.611765, 1)
+theme_override_colors/font_focus_color = Color(0.439216, 0.341176, 0.611765, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("5_ncdfs")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qm36")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yuoex")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ad0g2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ywihm")
+text = "Take"
+
+[node name="Gap" type="Control" parent="UI/AbilityPickUpScreen/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+
+[node name="DiscardAbility" type="Button" parent="UI/AbilityPickUpScreen/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.878431, 0.588235, 0.658824, 1)
+theme_override_colors/font_pressed_color = Color(0.0392157, 0.0352941, 0.0705882, 1)
+theme_override_colors/font_hover_color = Color(0.439216, 0.341176, 0.611765, 1)
+theme_override_colors/font_focus_color = Color(0.439216, 0.341176, 0.611765, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("5_ncdfs")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qm36")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yuoex")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ad0g2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ywihm")
+text = "Discard
+"
 
 [node name="PauseMenu" type="Control" parent="UI"]
 process_mode = 3
@@ -409,6 +495,8 @@ vertical_alignment = 1
 
 [connection signal="pressed" from="UI/MainMenu/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="UI/MainMenu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="UI/AbilityPickUpScreen/VBoxContainer/HBoxContainer/TakeAbility" to="." method="_on_take_ability_pressed"]
+[connection signal="pressed" from="UI/AbilityPickUpScreen/VBoxContainer/HBoxContainer/DiscardAbility" to="." method="_on_discard_ability_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Reset" to="." method="_on_reset_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/VBoxContainer/ToMenu" to="." method="_on_to_menu_pressed"]

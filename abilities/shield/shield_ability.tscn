@@ -12,3 +12,5 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nbjhg")
 icon = ExtResource("2_fnj30")
+ability_name = "Shield"
+ability_description = "Protects the philactery while held, preventing it from taking any damage."

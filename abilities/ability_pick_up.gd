@@ -11,5 +11,5 @@ func initiate(arg : PackedScene):
 
 func _on_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if body.is_in_group("Player"):
-		get_tree().get_first_node_in_group("GameController").swap_ability(ability)
+		get_tree().get_first_node_in_group("GameController").on_ability_pickup(ability)
 		queue_free()
