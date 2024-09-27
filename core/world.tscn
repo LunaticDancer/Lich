@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bbixjs8kdo7j"]
+[gd_scene load_steps=23 format=3 uid="uid://bbixjs8kdo7j"]
 
 [ext_resource type="Script" path="res://core/game_controller.gd" id="1_4ubsc"]
 [ext_resource type="PackedScene" uid="uid://3stwd766vpxl" path="res://core/play_area.tscn" id="2_xaokt"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dghrmefrjqvnc" path="res://ui/DashBook.png" id="9_buipd"]
 [ext_resource type="Texture2D" uid="uid://ddml00rfkucsy" path="res://ui/Dash1.png" id="10_kav2h"]
 [ext_resource type="Texture2D" uid="uid://bopfaewgn8nmg" path="res://ui/Dash2.png" id="11_bkyve"]
+[ext_resource type="Shader" path="res://enemies/blood_vfx/blood_splatter.gdshader" id="13_wbq3w"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qm36"]
 
@@ -26,6 +27,14 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v1mjq"]
 shader = ExtResource("4_6xaee")
 shader_parameter/fill = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f6dho"]
+shader = ExtResource("13_wbq3w")
+shader_parameter/intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_drf13"]
+shader = ExtResource("13_wbq3w")
+shader_parameter/intensity = 0.0
 
 [node name="World" type="Node2D" groups=["GameController"]]
 process_mode = 3
@@ -322,6 +331,7 @@ texture = ExtResource("9_buipd")
 
 [node name="Left" type="TextureRect" parent="UI/GameplayUI/Dashes"]
 texture_filter = 3
+material = SubResource("ShaderMaterial_f6dho")
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -337,6 +347,7 @@ texture = ExtResource("10_kav2h")
 
 [node name="Right" type="TextureRect" parent="UI/GameplayUI/Dashes"]
 texture_filter = 3
+material = SubResource("ShaderMaterial_drf13")
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
