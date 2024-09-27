@@ -1,6 +1,6 @@
 extends Node2D
 
-enum MENU_STATE {MAIN, GAMEPLAY, PAUSE, PICKUP}
+enum MENU_STATE {MAIN, GAMEPLAY, PAUSE, PICKUP, DEATH}
 
 @export var play_area_scene : PackedScene
 
@@ -26,6 +26,9 @@ func _process(delta):
 	handle_dash_regen(delta)
 
 func _unhandled_input(event):
+	if current_state == MENU_STATE.DEATH:
+		$UI/DeathScreen.hide()
+		_on_to_menu_pressed()
 	if current_state == MENU_STATE.GAMEPLAY:
 		if event.is_action_pressed("pause"):
 			pause()
@@ -88,6 +91,10 @@ func receive_mana_damage(amount : int):
 	$UI/GameplayUI.update_mana(mana/100.0)
 
 func game_over():
+	current_state = MENU_STATE.DEATH
+	$UI/DeathScreen.show()
+	$UI/GameplayUI.hide()
+	get_tree().paused = true
 	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(63,63))
 	pass
 
