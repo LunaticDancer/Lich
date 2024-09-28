@@ -57,7 +57,9 @@ func _on_play_pressed():
 	current_state = MENU_STATE.GAMEPLAY
 	$UI/MainMenu.hide()
 	$UI/GameplayUI.show()
+	ability = null
 	$UI/GameplayUI/SpellSlot/AbilityIcon.texture = null
+	$UI/GameplayUI/Score/ScoreDisplay.text = "Score: " + str(0)
 	play_area = play_area_scene.instantiate()
 	Input.set_custom_mouse_cursor(cross_cursor, Input.CURSOR_ARROW, Vector2(63,63))
 	init_player_resources()
