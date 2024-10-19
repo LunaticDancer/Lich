@@ -13,6 +13,7 @@ var current_state = MENU_STATE.MAIN
 # player resources
 var dashes := 2.0
 var mana := 0.0
+var mana_display := 0.0
 var score := 0
 var ability : Ability
 var considered_ability : PackedScene
@@ -27,6 +28,7 @@ func _ready():
 func _process(delta):
 	handle_dash_regen(delta)
 	handle_ability_sustain(delta)
+	handle_mana_display()
 
 func _unhandled_input(event):
 	if current_state == MENU_STATE.DEATH:
@@ -65,6 +67,13 @@ func handle_dash_regen(delta):
 	dashes = min(dashes + delta, 2)
 	$UI/GameplayUI.update_dashes(dashes)
 
+func handle_mana_display():
+	if mana > mana_display:
+		mana_display = mana
+	else:
+		mana_display = lerpf(mana_display, mana, 0.04)
+	$UI/GameplayUI.update_mana(mana_display/100.0)
+
 func handle_ability_sustain(delta):
 	if ability == null:
 		return
@@ -74,7 +83,6 @@ func handle_ability_sustain(delta):
 	var frame_cost = ability.sustain_cost * delta
 	if mana > frame_cost:
 		mana -= frame_cost
-		$UI/GameplayUI.update_mana(mana/100.0)
 		ability.on_sustained(delta)
 	else:
 		ability.on_deactivated()
@@ -99,6 +107,7 @@ func _on_play_pressed():
 func init_player_resources():
 	dashes = 2
 	mana = 0
+	mana_display = 0
 	score = 0
 	ability = null
 	is_ability_sustained = false
@@ -135,7 +144,6 @@ func swap_ability(new_ability : PackedScene):
 
 func receive_mana_damage(amount : int):
 	mana = max(0, mana - amount)
-	$UI/GameplayUI.update_mana(mana/100.0)
 
 func game_over():
 	current_state = MENU_STATE.DEATH
