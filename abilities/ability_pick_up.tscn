@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://g3byng8s3ny1"]
+[gd_scene load_steps=6 format=3 uid="uid://g3byng8s3ny1"]
 
 [ext_resource type="Script" path="res://abilities/ability_pick_up.gd" id="1_lxofy"]
 [ext_resource type="Texture2D" uid="uid://c12heykrdb5a6" path="res://abilities/shield/shield.png" id="1_uudum"]
 [ext_resource type="PackedScene" uid="uid://bbbvosouesy2b" path="res://abilities/shield/shield_ability.tscn" id="2_aa66e"]
+[ext_resource type="Texture2D" uid="uid://dlu4ua8ra7nn5" path="res://abilities/ability_bubble.png" id="4_4lbuc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d84q5"]
 radius = 30.0
@@ -13,9 +14,14 @@ ability = ExtResource("2_aa66e")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -32)
+position = Vector2(-1, -76)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_uudum")
+
+[node name="AbilityBubble" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(1, -54)
+texture = ExtResource("4_4lbuc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["AbilityPickUp"]]
 shape = SubResource("CircleShape2D_d84q5")
