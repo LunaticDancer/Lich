@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cydlqp815j1wm"]
+[gd_scene load_steps=15 format=3 uid="uid://cydlqp815j1wm"]
 
 [ext_resource type="Script" path="res://core/player.gd" id="1_hm74a"]
-[ext_resource type="PackedScene" uid="uid://ch1fchvq8pb2v" path="res://core/player_swing.tscn" id="2_mq1h4"]
 [ext_resource type="Texture2D" uid="uid://c51iixruwiwli" path="res://core/sprites/Lich_01.png" id="3_7hr5c"]
 [ext_resource type="Texture2D" uid="uid://4yp1hqk5tk4b" path="res://core/sprites/Lich_02.png" id="4_n2x40"]
 [ext_resource type="Texture2D" uid="uid://c64xuevirtd7g" path="res://core/sprites/Lich_03.png" id="5_b8qkl"]
+[ext_resource type="Texture2D" uid="uid://dpcum3spa26bo" path="res://core/sprites/Lich_Healing_03.png" id="6_lb0oo"]
+[ext_resource type="Texture2D" uid="uid://docb37tmtphcx" path="res://core/sprites/Lich_Healing_02.png" id="7_iurrj"]
+[ext_resource type="Texture2D" uid="uid://cw83vkt8oosug" path="res://core/sprites/Lich_Healing_01.png" id="8_07o7x"]
+[ext_resource type="Texture2D" uid="uid://be838f17rtqg2" path="res://core/sprites/Healing_Particle.png" id="8_460t3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lhfc3"]
 radius = 15.0
@@ -25,12 +28,95 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_lb0oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iurrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_07o7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lb0oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iurrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_07o7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lb0oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iurrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_07o7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lb0oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iurrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_07o7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lb0oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iurrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_07o7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_lb0oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iurrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_07o7x")
+}],
+"loop": false,
+"name": &"healing",
+"speed": 12.0
 }]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0qafi"]
+
+[sub_resource type="Gradient" id="Gradient_p1vrt"]
+offsets = PackedFloat32Array(0, 0.156522, 0.734783, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1sotd"]
+gradient = SubResource("Gradient_p1vrt")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qtl2y"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 64.0
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(12.675, 0, 0)
+gravity = Vector3(0, -250, 0)
+color_ramp = SubResource("GradientTexture1D_1sotd")
+turbulence_enabled = true
+turbulence_noise_strength = 1.94
+turbulence_noise_scale = 4.302
+turbulence_noise_speed = Vector3(3, 4, 5)
+turbulence_noise_speed_random = 2.0
 
 [node name="Lich" type="CharacterBody2D" groups=["Player"]]
 motion_mode = 1
 script = ExtResource("1_hm74a")
-basicAttackPrefab = ExtResource("2_mq1h4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_lhfc3")
@@ -43,6 +129,18 @@ texture_filter = 3
 position = Vector2(0, -70)
 sprite_frames = SubResource("SpriteFrames_exsyl")
 autoplay = "default"
-frame_progress = 0.939986
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_0qafi")
+position = Vector2(0, -30)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_qtl2y")
+texture = ExtResource("8_460t3")
+lifetime = 2.0
+randomness = 1.0
+trail_lifetime = 5.83
 
 [connection signal="timeout" from="DashTimeout" to="." method="_on_dash_timeout_timeout"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
