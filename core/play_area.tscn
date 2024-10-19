@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://3stwd766vpxl"]
+[gd_scene load_steps=6 format=3 uid="uid://3stwd766vpxl"]
 
 [ext_resource type="PackedScene" uid="uid://7aemojh6igaj" path="res://core/phylactery.tscn" id="1_2fhtn"]
 [ext_resource type="Script" path="res://core/arena_controller.gd" id="1_fqvlf"]
 [ext_resource type="PackedScene" uid="uid://cydlqp815j1wm" path="res://core/lich.tscn" id="2_l8r1w"]
 [ext_resource type="PackedScene" uid="uid://8pa7jm5j8mk6" path="res://enemies/wisp/wisp.tscn" id="3_cki4b"]
+[ext_resource type="PackedScene" uid="uid://g3byng8s3ny1" path="res://abilities/ability_pick_up.tscn" id="5_w5qxi"]
 
 [node name="PlayArea" type="Node2D"]
 process_mode = 1
@@ -19,5 +20,8 @@ autostart = true
 
 [node name="Lich" parent="." instance=ExtResource("2_l8r1w")]
 position = Vector2(0, -90)
+
+[node name="AbilityPickUp" parent="." instance=ExtResource("5_w5qxi")]
+position = Vector2(182, 0)
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

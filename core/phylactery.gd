@@ -34,3 +34,11 @@ func update_hp_display():
 		$"HpDisplay/3".show()
 	else:
 		$"HpDisplay/3".hide()
+
+func activate_shield():
+	invulnerable = true
+	$ShieldEffect.show()
+	
+func deactivate_shield():
+	invulnerable = false
+	$ShieldEffect.hide()

@@ -5,6 +5,9 @@ class_name Ability
 @export var ability_name : String
 @export var ability_description : String
 
+@export var activation_cost : float
+@export var sustain_cost : float
+
 func on_activated():
 	pass
 

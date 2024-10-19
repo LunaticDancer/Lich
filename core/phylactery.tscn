@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://7aemojh6igaj"]
+[gd_scene load_steps=14 format=3 uid="uid://7aemojh6igaj"]
 
 [ext_resource type="Script" path="res://core/phylactery.gd" id="1_njeep"]
 [ext_resource type="Texture2D" uid="uid://bo3ekj37t0f7x" path="res://core/sprites/Philactery.png" id="2_v5stg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dly4c5wef1ih8" path="res://ui/Heart1.png" id="4_febg8"]
 [ext_resource type="Texture2D" uid="uid://bq85ihavbd8xa" path="res://ui/Heart2.png" id="5_vlcdo"]
 [ext_resource type="Texture2D" uid="uid://dngo7eiy8xcm1" path="res://ui/Heart3.png" id="6_5fbqj"]
+[ext_resource type="Texture2D" uid="uid://crnx6oep1httf" path="res://abilities/shield/shield_ability_effect.png" id="7_7ktv8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2vior"]
 radius = 16.65
@@ -78,3 +79,9 @@ texture = ExtResource("5_vlcdo")
 [node name="3" type="Sprite2D" parent="HpDisplay"]
 position = Vector2(25, -0.5)
 texture = ExtResource("6_5fbqj")
+
+[node name="ShieldEffect" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(2, -34)
+texture = ExtResource("7_7ktv8")

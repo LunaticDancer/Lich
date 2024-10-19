@@ -14,3 +14,5 @@ script = ExtResource("1_nbjhg")
 icon = ExtResource("2_fnj30")
 ability_name = "Shield"
 ability_description = "Protects the philactery while held, preventing it from taking any damage."
+activation_cost = 1.0
+sustain_cost = 40.0
