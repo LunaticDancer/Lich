@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://kf7kqgmm5234"]
+
+[ext_resource type="Script" path="res://abilities/basic_dart/basic_dart_projectile.gd" id="1_hix1r"]
+[ext_resource type="Texture2D" uid="uid://8ijmufrgqb4u" path="res://icon.svg" id="1_v71dm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8ya3c"]
+radius = 24.0
+
+[node name="basic_dart_projectile" type="Area2D"]
+script = ExtResource("1_hix1r")
+speed = 500.0
+is_aimed_at_player = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_v71dm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8ya3c")
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

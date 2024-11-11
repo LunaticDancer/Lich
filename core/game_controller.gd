@@ -45,6 +45,7 @@ func _unhandled_input(event):
 			if mana < ability.activation_cost:
 				return
 			ability.on_activated()
+			receive_mana_damage(ability.activation_cost)
 			is_ability_sustained = true;
 		if event.is_action_released("ability"):
 			if ability == null:
@@ -117,7 +118,6 @@ func init_player_resources():
 func enemy_killed(score_value : int):
 	score += score_value
 	$UI/GameplayUI/Score/ScoreDisplay.text = "Score: " + str(score)
-	mana = min(mana + 10, 100)
 	dashes = min(dashes + 1, 2)
 	$UI/GameplayUI.update_dashes(dashes)
 	$UI/GameplayUI.update_mana(mana/100.0)
@@ -144,6 +144,9 @@ func swap_ability(new_ability : PackedScene):
 
 func receive_mana_damage(amount : int):
 	mana = max(0, mana - amount)
+
+func gain_mana(amount: int):
+	mana = min(mana + amount, 100)
 
 func game_over():
 	current_state = MENU_STATE.DEATH

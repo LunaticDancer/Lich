@@ -48,7 +48,7 @@ func attack():
 	var attack = basicAttackPrefab.instantiate()
 	attack.global_position = global_position + get_local_mouse_position().normalized() * 8
 	attack.set_direction( get_local_mouse_position().angle() )
-	get_parent().add_child(attack)
+	add_sibling(attack)
 
 func dash():
 	if is_healing:

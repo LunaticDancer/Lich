@@ -15,6 +15,7 @@ func _physics_process(delta):
 
 func _on_area_2d_body_entered(body):
 	if body is Enemy:
+		get_tree().get_first_node_in_group("GameController").gain_mana(10)
 		body.receive_damage(1)
 		body.bleed(Vector2(cos(direction), sin(direction)))
 
