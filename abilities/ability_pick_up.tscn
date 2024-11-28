@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://g3byng8s3ny1"]
 
 [ext_resource type="Script" path="res://abilities/ability_pick_up.gd" id="1_lxofy"]
-[ext_resource type="PackedScene" uid="uid://3044ronlsa6q" path="res://abilities/basic_dart/basic_dart_ability.tscn" id="2_75wf6"]
-[ext_resource type="Texture2D" uid="uid://8ijmufrgqb4u" path="res://icon.svg" id="3_phhwv"]
+[ext_resource type="PackedScene" uid="uid://3044ronlsa6q" path="res://abilities/basic_dart/basic_dart_ability.tscn" id="2_3ef0c"]
+[ext_resource type="Texture2D" uid="uid://8ijmufrgqb4u" path="res://icon.svg" id="3_v3tho"]
 [ext_resource type="Texture2D" uid="uid://dlu4ua8ra7nn5" path="res://abilities/ability_bubble.png" id="4_4lbuc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d84q5"]
@@ -10,13 +10,13 @@ radius = 30.0
 
 [node name="AbilityPickUp" type="Area2D"]
 script = ExtResource("1_lxofy")
-ability = ExtResource("2_75wf6")
+ability = ExtResource("2_3ef0c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(-1, -76)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_phhwv")
+texture = ExtResource("3_v3tho")
 
 [node name="AbilityBubble" type="Sprite2D" parent="."]
 texture_filter = 1
