@@ -6,7 +6,7 @@ var progress = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Timer.start(9)
-	frame = randf_range(0, 3)
+	frame = randi_range(0, 3)
 
 func _process(delta):
 	if is_disappearing:

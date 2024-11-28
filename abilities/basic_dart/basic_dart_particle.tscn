@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://bupkx1jc82rly"]
+
+[ext_resource type="Texture2D" uid="uid://y1i61g25yf3w" path="res://abilities/basic_dart/dart_particle_spritesheet.png" id="1_4vq00"]
+[ext_resource type="Shader" path="res://enemies/blood_vfx/blood_splatter.gdshader" id="1_g6dhb"]
+[ext_resource type="Script" path="res://abilities/basic_dart/basic_dart_particle.gd" id="2_7xtlt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qyd4i"]
+resource_local_to_scene = true
+shader = ExtResource("1_g6dhb")
+shader_parameter/intensity = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ocqq4"]
+atlas = ExtResource("1_4vq00")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8dbg"]
+atlas = ExtResource("1_4vq00")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iio30"]
+atlas = ExtResource("1_4vq00")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0uc60"]
+atlas = ExtResource("1_4vq00")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ep2mr"]
+atlas = ExtResource("1_4vq00")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7f3hy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ocqq4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n8dbg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iio30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0uc60")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ep2mr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[node name="BasicDartParticle" type="Node2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_qyd4i")
+script = ExtResource("2_7xtlt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_qyd4i")
+position = Vector2(0, -50)
+sprite_frames = SubResource("SpriteFrames_7f3hy")
