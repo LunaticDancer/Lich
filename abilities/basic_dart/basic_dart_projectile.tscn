@@ -1,56 +1,55 @@
 [gd_scene load_steps=8 format=3 uid="uid://kf7kqgmm5234"]
 
-[ext_resource type="Script" path="res://abilities/basic_dart/basic_dart_projectile.gd" id="1_hix1r"]
+[ext_resource type="Script" path="res://abilities/basic_dart/basic_dart_projectile.gd" id="1_xiq04"]
 [ext_resource type="Texture2D" uid="uid://dh2yfy6ubjhty" path="res://abilities/basic_dart/dart_projectile_spritesheet.png" id="2_8bb7p"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8ya3c"]
-radius = 24.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_fc18t"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pmhx3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_km8t3"]
 atlas = ExtResource("2_8bb7p")
 region = Rect2(0, 0, 80, 140)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_stuqw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jqvh"]
 atlas = ExtResource("2_8bb7p")
 region = Rect2(80, 0, 80, 140)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n1kp4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_egyfh"]
 atlas = ExtResource("2_8bb7p")
 region = Rect2(0, 140, 80, 140)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_gh6vp"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_4oioq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pmhx3")
+"texture": SubResource("AtlasTexture_km8t3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_stuqw")
+"texture": SubResource("AtlasTexture_4jqvh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_n1kp4")
+"texture": SubResource("AtlasTexture_egyfh")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[node name="basic_dart_projectile" type="Area2D"]
-script = ExtResource("1_hix1r")
-speed = 500.0
+[node name="BasicDartProjectile" type="Area2D"]
+script = ExtResource("1_xiq04")
+speed = 600.0
 is_aimed_at_player = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_8ya3c")
-
-[node name="DeathTimer" type="Timer" parent="."]
-wait_time = 0.2
+shape = SubResource("CircleShape2D_fc18t")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -58)
-sprite_frames = SubResource("SpriteFrames_gh6vp")
+position = Vector2(0, -57)
+sprite_frames = SubResource("SpriteFrames_4oioq")
 autoplay = "default"
-frame_progress = 0.991081
+frame_progress = 0.340148
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.1
 
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
