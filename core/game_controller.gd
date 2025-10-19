@@ -21,7 +21,7 @@ var is_ability_sustained : bool
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	# DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	Input.set_custom_mouse_cursor(hand_cursor, Input.CURSOR_ARROW, Vector2(63,63))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
