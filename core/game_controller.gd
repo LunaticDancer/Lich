@@ -99,7 +99,7 @@ func _on_play_pressed():
 	$UI/GameplayUI.show()
 	ability = null
 	$UI/GameplayUI/SpellSlot/AbilityIcon.texture = null
-	$UI/GameplayUI/Score/ScoreDisplay.text = "Score: " + str(0)
+	$UI/GameplayUI/ScoreDisplay.text = "Score: " + str(0)
 	play_area = play_area_scene.instantiate()
 	Input.set_custom_mouse_cursor(cross_cursor, Input.CURSOR_ARROW, Vector2(63,63))
 	init_player_resources()
@@ -117,7 +117,7 @@ func init_player_resources():
 
 func enemy_killed(score_value : int):
 	score += score_value
-	$UI/GameplayUI/Score/ScoreDisplay.text = "Score: " + str(score)
+	$UI/GameplayUI/ScoreDisplay.text = "Score: " + str(score)
 	dashes = min(dashes + 1, 2)
 	$UI/GameplayUI.update_dashes(dashes)
 	$UI/GameplayUI.update_mana(mana/100.0)
